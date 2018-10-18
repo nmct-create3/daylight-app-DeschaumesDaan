@@ -47,9 +47,23 @@ let showResult = ( queryResponse ) => {
 // 2 Aan de hand van een longitude en latitude gaan we de yahoo wheater API ophalen.
 let getAPI = ( lat, lon ) => {
 	// Eerst bouwen we onze url op
+	const ENDPOINT = 'https://query.yahooapis.com/v1/public/yql?q=';
 	// en doen we een query met de Yahoo query language
+	let query = `select astronomy, location from weather.forecast where woeid in (select woeid from geo.places(1) where text="(${lat}, ${lon})")`;
 
 	// Met de fetch API proberen we de data op te halen.
+	fetch(`${ENDPOINT}${query}&format=json`)
+	.then(function(response)
+	{
+		return response.json();
+
+	})
+	.then(function(jsonResponse){
+		console.log(jsonResponse.query.results.channel);
+	})
+	.catch(function(error){
+		console.log("Error=", error);
+	});
 	// Als dat gelukt is, gaan we naar onze showResult functie.
 }
 

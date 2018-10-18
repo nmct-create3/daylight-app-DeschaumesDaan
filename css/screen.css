@@ -1,6 +1,7 @@
-/*------------------------------------*\
-#FONTS
-\*------------------------------------*/
+@font-face{
+    font-family: 'WorkSans';
+    src: url(/fonts/WorkSans-Regular.ttf);
+}
 
 /*------------------------------------*\
 #Variables
@@ -8,6 +9,9 @@
 
 :root {
     /* colors */
+    --color-alpha-light: #CCE7FF;
+    --color-neutral-light: 15, 53, 87;
+    --color-neutral: #0F3557;
 
     /* opacity */
 
@@ -27,7 +31,9 @@
 html {
     font-size: 16px;
     line-height: 1.5;
-    font-family: Helvetica, arial, sans-serif;
+    background-color: var(--color-alpha-light);
+    font-family: Work sans, arial, sans-serif;
+    font-feature-settings: "zero" 1;
     box-sizing: border-box;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -249,7 +255,7 @@ input::placeholder {
 */
 
 .c-logo {
-
+    font-size: 16px;
 }
 
 /*
@@ -259,33 +265,91 @@ input::placeholder {
 */
 
 .c-sun {
+    width: 22px;
+    height: 22px;
+    color: var(--color-neutral);
+    flex-direction: row;
+    
+    
 
 }
 
 .c-logo .c-sun {
-
+    margin-right: 8px;
 }
 
-/*
-    Component: App
-    ---
-    Main app wrapper
-*/
 
-/*
-    Component: Horizon
-    ---
-    Horizon with sun visualisation
-*/
+.c-app{
+    margin: 0 auto;
+    max-width: 29em;
+    min-height: 100vh;
+    padding: 32px 32px 8px;
+    display: flex;
+    flex-direction: column;    
+}
+.c-app__summary{
+    font-size: 28px;
+    line-height: 2;
+}
+    /*Main app wrapper*/
+.js-sunrise{
+    float: left;
+}
+.js-sunset{
+    float: right;
+}
+
+.c-horizon__line{
+    clear: both;
+    border-top: 1px solid #000;
+    margin-bottom: 50px;
+    flex-direction: row;
+}
+.c-horizon__time{
+    font-size: 12px;
+    line-height: 1.5;
+}
+.c-horizon__sky-wrapper{
+    padding-top: 22px;
+    padding-right: 40px; 
+    position: relative;
+    height: 200px;
+    overflow: hidden;
+}
+
+.c-horizon__sky{
+    position: relative;
+}
+.c-horizon__sun{
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+.c-horizon__sun::before{
+    content: attr(data-time);
+    font-size: 12px;
+    line-height: 1.5;
+    display: block;
+    margin-bottom: 8px;
+    text-align: center;
+}
+
+
 
 /*------------------------------------*\
 #UTILITIES
 \*------------------------------------*/
 
-/*
-    Utilities: Mute
-    Mute with opacity
-*/
+.u-muted{
+    color: rgba(var(--color-neutral-light), 0.6);
+}
 
 /*------------------------------------*\
 #STATES
